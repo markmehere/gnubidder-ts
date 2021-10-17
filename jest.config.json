@@ -1,0 +1,10 @@
+{
+  "transform": {
+    "^.+\\.tsx?$": "ts-jest"
+  },
+  "testMatch": [
+    "<rootDir>/src/**/*.spec.(ts|tsx|js|jsx)"
+  ],
+  "testPathIgnorePatterns": [ "/lib/", "/node_modules/", "/bin/" ],
+  "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"]
+}

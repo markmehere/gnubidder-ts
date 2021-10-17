@@ -1,0 +1,34 @@
+{
+  "name": "gnubidder-ts",
+  "version": "0.8.0",
+  "description": "A TypeScript port of gnubridge",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --env=node --colors",
+    "tsc": "tsc",
+    "start": "npm run make-all && node bin/main-dist.js",
+    "make": "node makepreamble.js withseed && tsc && concat -o bin/main-dist.js bin/preamble.js bin/main.js run.js",
+    "make-bidding": "node makepreamble.js && tsc -p tsconfig-bidding.json && concat -o bin/gnubridge-bidding.js bin/preamble.js bin/bidding.js run-bidding.js",
+    "make-playing": "node makepreamble.js && tsc -p tsconfig-playing.json && concat -o bin/gnubridge-playing.js bin/preamble.js bin/playing.js run-playing.js",
+    "make-all": "npm run make && npm run make-bidding && npm run make-playing",
+    "lint": "eslint src/**/*.{js,ts,tsx}",
+    "lint:fix": "eslint src/**/*.{js,ts,tsx} --fix"
+  },
+  "author": "Mark Pazolli",
+  "license": "GPL-3.0-or-later",
+  "dependencies": {
+    "@types/jest": "^26.0.14",
+    "@typescript-eslint/eslint-plugin": "^4.6.0",
+    "@typescript-eslinte/parser": "^4.6.0",
+    "concat": "^1.0.3",
+    "eslint": "^6.8.0",
+    "eslint-plugin-import": "^2.22.1",
+    "jest": "^26.4.2",
+    "seedrandom": "^3.0.5",
+    "ts-jest": "^26.4.1",
+    "typescript": "^4.0.3"
+  },
+  "devDependencies": {
+    "@types/seedrandom": "^2.4.28"
+  }
+}

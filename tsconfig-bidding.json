@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "es2015",                       /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019', 'ES2020', or 'ESNEXT'. */
+    "module": "amd",                          /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', 'es2020', or 'ESNext'. */
+    "outFile": "./bin/bidding.js",            /* Concatenate and emit output to single file. */
+    "esModuleInterop": true,                  /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */
+    "skipLibCheck": true,                     /* Skip type checking of declaration files. */
+    "forceConsistentCasingInFileNames": true, /* Disallow inconsistently-cased references to the same file. */
+    "noImplicitUseStrict": true
+  },
+  "exclude": [
+    "run*.js",
+    "**/cli/*",
+    "minrequire.js",
+    "*/**/*.spec.*",
+    "**/RPQuizzes.ts",
+    "**/ProductionSettings.ts",
+    "**/search/**",
+    "**/GameUtils.ts",
+    "**/Trick.ts",
+    "**/Player.ts",
+    "**/Deal.ts",
+    "**/ScoreCalculator.ts",
+    "**/api/playing*",
+    "**/custom/**"
+  ]
+}

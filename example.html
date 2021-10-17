@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bridge Example</title>
+  <style>
+    div {
+      margin: 30px 0;
+      font-family: monospace;
+      font-size: 16pt;
+    }
+  </style>
+</head>
+<body>
+  <div id="board"></div>
+  <div id="bidding"></div>
+  <div id="playing">Computing the opening play...</div>
+  <script src="./bin/gnubridge-bidding.js"></script>
+  <script src="./bin/gnubridge-playing.js"></script>
+  <script type="text/javascript">
+    const prettySymbols = (str) => str.replace(/S/g, '&spades;').replace(/C/g, '&clubs;')
+      .replace(/H/g, '<span style="color: red">&hearts;</span>').replace(/D/g, '<span style="color: red">&diams;</span>');
+    let dealtHands = {
+      west: ['7S','6S','KH','JH','9H','4H','QD','10D','6D','2D','10C','7C','6C'],
+      north: ['AS','KS','QS','10S','8S','4S','3S','AH','6H','5H','KC','JC','3C'],
+      east: ['JS','2S','QH','8H','KD','8D','7D','4D','3D','9C','8C','5C','4C'],
+      south: ['9S','5S','10H','7H','3H','2H','AD','JD','9D','5D','AC','QC','2C'],
+      nextToPlay: 'N'
+    };
+    document.getElementById('board').innerHTML = prettySymbols(JSON.stringify(dealtHands, null)
+      .replace(/[\}]|(\],)/g, '<br />').replace(/[\{\[",]/g, ' '));
+    const bidWorker = new Worker('./bin/gnubridge-bidding.js');
+    const playerWorker = new Worker('./bin/gnubridge-playing.js');
+    bidWorker.postMessage({ dealtHands });
+    bidWorker.onmessage = e => {
+      document.getElementById('bidding').innerHTML = `In this case North would bid: ${prettySymbols(e.data)}`;
+      const playerWorker = new Worker('./bin/gnubridge-playing.js');
+      const contract = { highestBid: '1S' };
+      dealtHands = { ...dealtHands, pwest: [], pnorth: [], peast: [], psouth: [], playedCards: [], nextToPlay: 'E' };
+      playerWorker.postMessage({ dealtHands, contract });
+      playerWorker.onmessage = e => {
+        document.getElementById('playing').innerHTML = `And on a ${prettySymbols('1S')}
+          contract East would open with: ${prettySymbols(e.data)}`;
+      };
+    };
+  </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bridge Example</title>
+  <style>
+    div {
+      min-height: 20px;
+      font-family: sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <div id="logger">Loading (this could take 20 seconds)...</div>
+  <script type="text/javascript">
+    /* Idea from Fellyp Santos */
+    const oldConsole = console.log;
+    const logger = document.getElementById("logger");
+    console.log = text => {
+      const element = document.createElement("div");
+      const txt = document.createTextNode(text);
+  
+      element.appendChild(txt);
+      logger.appendChild(element);
+      oldConsole(text);
+    };
+  </script>
+  <script async src="./bin/main-dist.js"></script>
+</body>
+</html>
