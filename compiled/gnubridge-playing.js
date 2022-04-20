@@ -1628,14 +1628,14 @@ define("core/search/rules/AlwaysPlayWinner", ["require", "exports", "core/search
 define("core/search/RuleFilters", ["require", "exports", "core/search/rules/AlwaysPlayWinner"], function (require, exports, AlwaysPlayWinner_1) {
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.applyRuleFilters = void 0;
+    // eslint-disable-next-line
     function applyRuleFilters(moves, position, player, rules, contract) {
-        let lastResult;
         if (!moves || !moves.length)
             return moves;
         if (!rules)
             return moves;
         // Pro-tip: you can really improve things using these rules!
-        lastResult = AlwaysPlayWinner_1.alwaysPlayWinner(moves, position, player, rules);
+        const lastResult = AlwaysPlayWinner_1.alwaysPlayWinner(moves, position, player, rules);
         if (lastResult && lastResult.length > 0) {
             return rules.noDeepSearch ? [lastResult[0]] : lastResult;
         }

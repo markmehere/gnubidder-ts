@@ -844,10 +844,10 @@ define("core/bidding/Auctioneer", ["require", "exports", "core/Direction", "core
             }
             else {
                 this.passCount = 0;
-                if (bid.isRedoubled()) {
+                if (bid.isRedouble()) {
                     this.getHighBid().makeRedoubled();
                 }
-                if (bid.isDouble()) {
+                else if (bid.isDouble()) {
                     this.getHighBid().makeDoubled();
                 }
                 else {
